@@ -1,0 +1,22 @@
+$bg-color: #424242;
+$font-color: #f8f8f2;
+$light-font-color: #acacac;
+
+$green: #388e3c;
+$blue: #90caf9;
+$light-white: #e0e0e0;
+
+$scrollbar-bg: #666666;
+$scrollbar-hover: #9f9f9f;
+
+$record-bg: #303133;
+
+@mixin border($color: red) {
+  border: 3px solid $color;
+}
+
+.rs-theme-dark {
+  --rs-btn-default-bg: #2f3030;
+  --rs-bg-overlay: #373838;
+  --rs-input-bg: #2f3030;
+}

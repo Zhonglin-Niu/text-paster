@@ -1,0 +1,68 @@
+@import "./_variables";
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Calibri", sans-serif;
+  background-color: $bg-color;
+  color: $font-color;
+}
+
+#root {
+  background-color: $bg-color;
+  color: $font-color;
+}
+
+/* Set the width of the scrollbar */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+/* Set the background color of the scrollbar thumb */
+*::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-bg;
+  border-radius: 6px; /* Set the border radius for the scrollbar thumb */
+  border: none;
+}
+
+/* Set the background color of the scrollbar track */
+*::-webkit-scrollbar-track,
+::-webkit-scrollbar-track-piece {
+  background-color: inherit;
+}
+
+/* Set the scrollbar thumb style on hover */
+*::-webkit-scrollbar-thumb:hover {
+  background-color: $scrollbar-hover;
+}
+
+.main {
+  height: 100vh;
+  display: flex;
+  width: 100%;
+
+  .left {
+    width: 180px;
+    height: 100%;
+    padding: 10px;
+    // @include border(red);
+  }
+
+  .middle {
+    flex: 1;
+    height: 100%;
+    padding: 10px;
+    // @include border(green);
+  }
+
+  .right {
+    width: 80px;
+    height: 100%;
+    // @include border(blue);
+  }
+}

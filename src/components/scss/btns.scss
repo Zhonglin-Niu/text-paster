@@ -1,0 +1,48 @@
+@import "./variables";
+
+.btnGroups {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: end;
+  padding: 10px 16px;
+
+  // .topBtns {
+  //   height: 30%;
+  //   padding: 10px;
+  // }
+
+  // .botBtns {
+  //   height: 70%;
+  //   padding: 10px;
+  // }
+
+  .btns {
+    $size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $size;
+    height: $size;
+    background-color: $light-white;
+    border-radius: 100%;
+    color: black;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+
+    &:hover {
+      background-color: white;
+    }
+  }
+
+  .btns.accent {
+    background-color: $blue;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}
