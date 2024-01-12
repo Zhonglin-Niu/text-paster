@@ -2,22 +2,64 @@
 import { configureStore, createSlice } from "@reduxjs/toolkit";
 import { IRecordGet, IRecordPost, ITagGet, Notification } from "./utils/interfaces";
 
+const getItem = (key: string) => {
+  try {
+    // @ts-expect-error api available when running in utools
+    return window.utools.dbStorage.getItem(key);
+  } catch {
+    return localStorage.getItem(key);
+  }
+};
+
+const setItem = (key: string, value: string) => {
+  try {
+    // @ts-expect-error api available when running in utools
+    window.utools.dbStorage.setItem(key, value);
+  } catch {
+    localStorage.setItem(key, value);
+  }
+};
+
+const removeItem = (key: string) => {
+  try {
+    // @ts-expect-error api available when running in utools
+    window.utools.dbStorage.removeItem(key);
+  } catch {
+    localStorage.removeItem(key);
+  }
+};
+
 const recordsSlice = createSlice({
   name: "records",
   initialState: [] as IRecordGet[],
   reducers: {
     set(_, action) {
+      action.payload.forEach((record: IRecordGet) => {
+        if (record.desc.trim() !== "") {
+          setItem(`desc/${record.desc}`, record.content);
+        }
+      });
       return action.payload;
     },
     delete(state, action) {
-      return state.filter(record => record.id !== action.payload);
+      if (action.payload.desc.trim() !== "") {
+        removeItem(`desc/${action.payload.desc}`);
+      }
+      return state.filter(record => record.id !== action.payload.id);
     },
     update(state, action) {
       const record = action.payload;
+      if (record.desc.trim() !== "") {
+        setItem(`desc/${record.desc}`, record.content);
+      }
       return state.map(item => (item.id === record.id ? record : item));
     },
     add(state, action) {
-      return [action.payload, ...state];
+      const record = action.payload;
+      if (record.desc.trim() !== "") {
+        setItem(`desc/${record.desc}`, record.content);
+      }
+      return [record, ...state];
     },
   },
 });
@@ -54,7 +96,7 @@ const pageDataSlice = createSlice({
       content: "",
     } as IRecordPost,
     isNewRecord: true,
-    API_BASE_URL: localStorage.getItem("API_BASE_URL") || "",
+    API_BASE_URL: getItem("API_BASE_URL") || "",
   },
   reducers: {
     setCurTagId(state, action) {
@@ -81,7 +123,7 @@ const pageDataSlice = createSlice({
     },
     setAPI_BASE(state, action) {
       state.API_BASE_URL = action.payload;
-      localStorage.setItem("API_BASE_URL", action.payload);
+      setItem("API_BASE_URL", action.payload);
     },
   },
 });

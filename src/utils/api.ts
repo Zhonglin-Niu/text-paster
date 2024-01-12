@@ -2,7 +2,20 @@ import axios, { AxiosRequestConfig } from "axios";
 import { IRecordGet, IRecordPost, ITagGet, ITagPost } from "./interfaces";
 
 // const baseURL = localStorage.getItem("API_BASE_URL")! || "http://localhost:8000";
-const baseURL = localStorage.getItem("API_BASE_URL") || "http://example.com";
+const getBaseURL = () => {
+  let url;
+
+  try {
+    // @ts-expect-error api available when running in utools
+    url = window.utools.dbStorage.getItem("API_BASE_URL");
+  } catch {
+    url = localStorage.getItem("API_BASE_URL");
+  }
+
+  return url || "http://example.com";
+};
+
+const baseURL = getBaseURL();
 
 export const serviceAxios = axios.create({
   baseURL,

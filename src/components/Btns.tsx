@@ -130,7 +130,7 @@ function BtnBot() {
           <Button
             onClick={async () => {
               dispatch((dispatch, getState) => {
-                dispatch(recordsActions.delete(curRecord.id));
+                dispatch(recordsActions.delete(curRecord));
                 dispatch(pageDataActions.setCurRecord(getState().records[0] || {}));
               });
               modalClose();
