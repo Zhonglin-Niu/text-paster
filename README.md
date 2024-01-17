@@ -1,6 +1,6 @@
 ## text-paster
 
-A website written to copy and paste some specific text easily.
+A website designed to copy and paste some specific text easily.
 
 [Link](https://github.com/Zhonglin-Niu/text-paster-backend) to the backend.
 
